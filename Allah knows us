@@ -1,1 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allah Knows Us - Complete Hub Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --darker: #0f172a;
+            --islamic-green: #0d9c6f;
+            --islamic-gold: #c19a3f;
+            --radius: 12px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--darker), var(--primary));
+            color: white;
+            padding: 18px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo i {
+            font-size: 32px;
+            color: var(--accent);
+        }
+
+        .logo h1 {
+            font-family: 'Amiri', serif;
+            font-weight: 700;
+            font-size: 28px;
+            background: linear-gradient(to right, var(--accent), var(--islamic-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: var(--radius);
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .coin-balance {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .coin-balance i {
+            color: var(--accent);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--accent), var(--islamic-green));
+            color: white;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Main Dashboard Layout */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 25px;
+            padding: 30px 0;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            border-radius: var(--radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            height: fit-content;
+        }
+
+        .sidebar-title {
+            font-family: 'Amiri', serif;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--darker);
+            position: relative;
+            padding-bottom: 12px;
+            text-align: center;
+        }
+
+        .sidebar-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--islamic-green));
+            border-radius: 3px;
+        }
+
+        .hub-list {
+            list-style: none;
+        }
+
+        .hub-list li {
+            margin-bottom: 12px;
+        }
+
+        .hub-list a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: var(--light);
+            border-radius: var(--radius);
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .hub-list a:hover, .hub-list a.active {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .hub-list i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .hub-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 320px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hub-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .hub-header {
+            padding: 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+        }
+
+        .hub-header h2 {
+            font-family: 'Amiri', serif;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .hub-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hub-icon {
+            font-size: 42px;
+            text-align: center;
+            margin: 10px 0;
+            color: var(--primary);
+        }
+
+        .coin-info {
+            background: #f0fdf4;
+            padding: 10px;
+            border-radius: var(--radius);
+            margin: 10px 0;
+            text-align: center;
+            border-left: 4px solid var(--islamic-green);
+        }
+
+        .coin-info i {
+            color: var(--islamic-green);
+            margin-right: 5px;
+        }
+
+        .hub-features {
+            list-style: none;
+            margin-top: auto;
+        }
+
+        .hub-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hub-features li:last-child {
+            border-bottom: none;
+        }
+
+        .hub-features i {
+            color: var(--islamic-green);
+        }
+
+        .hub-actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .hub-actions button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-hub-primary {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-hub-secondary {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        /* Subscription Plans */
+        .plans-section {
+            grid-column: 1 / -1;
+            margin-top: 30px;
+        }
+
+        .plans-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .plan-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .plan-card h3 {
+            font-family: 'Amiri', serif;
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--darker);
+        }
+
+        .plan-price {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .plan-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+
+        .plan-card.popular {
+            background: linear-gradient(to bottom right, #fefce8, #fef3c7);
+            border-color: var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, var(--darker), var(--primary));
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            font-family: 'Amiri', serif;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: #e0f2fe;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .user-info {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .auth-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            nav ul {
+                gap: 10px;
+            }
+            
+            nav a {
+                padding: 6px 10px;
+                font-size: 14px;
+            }
+            
+            .plans-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-star-and-crescent"></i>
+                    <h1>ALLAH KNOWS US</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#"><i class="fas fa-coins"></i> Earn System</a></li>
+                        <li><a href="#"><i class="fas fa-crown"></i> Premium Plans</a></li>
+                        <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
+                    </ul>
+                </nav>
+                <div class="user-info">
+                    <div class="coin-balance">
+                        <i class="fas fa-coins"></i>
+                        <span>125 Coins</span>
+                    </div>
+                    <button class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="dashboard">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <h2 class="sidebar-title">Our Hubs</h2>
+                <ul class="hub-list">
+                    <li><a href="#" class="active"><i class="fas fa-shopping-cart"></i> Shopping Hub</a></li>
+                    <li><a href="#"><i class="fas fa-newspaper"></i> GV News</a></li>
+                    <li><a href="#"><i class="fas fa-robot"></i> AI World Hub</a></li>
+                    <li><a href="#"><i class="fas fa-graduation-cap"></i> Edu Hub</a></li>
+                    <li><a href="#"><i class="fas fa-users"></i> Social Platform</a></li>
+                    <li><a href="#"><i class="fas fa-paint-brush"></i> Creator Hub</a></li>
+                    <li><a href="#"><i class="fas fa-globe"></i> Website Hub</a></li>
+                    <li><a href="#"><i class="fas fa-book"></i> Digital Library</a></li>
+                    <li><a href="#"><i class="fas fa-briefcase"></i> Business Hub</a></li>
+                    <li><a href="#"><i class="fas fa-hands-helping"></i> Islamic Motivation</a></li>
+                    <li><a href="#"><i class="fas fa-gamepad"></i> Game Developer AI</a></li>
+                    <li><a href="#"><i class="fas fa-university"></i> University Assistant AI</a></li>
+                </ul>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <!-- Shopping Hub -->
+                <div class="hub-card">
+                    <div class="hub-header">
+                        <h2>Shopping Hub</h2>
+                        <p>AI Assistant for Shopping</p>
+                    </div>
+                    <div class="hub-body">
+                        <div class="hub-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="coin-info">
+                            <i class="fas fa-coins"></i> Earn 1 coin per product purchase
+                        </div>
+                        <ul class="hub-features">
+                            <li><i class="fas fa-check-circle"></i> AI shopping assistant</li>
+                            <li><i class="fas fa-check-circle"></i> Halal products only</li>
+                            <li><i class="fas fa-check-circle"></i> Ethical sourcing</li>
+                        </ul>
+                        <div class="hub-actions">
+                            <button class="btn-hub-primary"><i class="fas fa-shopping-bag"></i> Shop Now</button>
+                            <button class="btn-hub-secondary"><i class="fas fa-info"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GV News -->
+                <div class="hub-card">
+                    <div class="hub-header">
+                        <h2>GV News</h2>
+                        <p>Bangladesh & International News</p>
+                    </div>
+                    <div class="hub-body">
+                        <div class="hub-icon">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <div class="coin-info">
+                            <i class="fas fa-info-circle"></i> No coin system
+                        </div>
+                        <ul class="hub-features">
+                            <li><i class="fas fa-check-circle"></i> Global coverage</li>
+                            <li><i class="fas fa-check-circle"></i> Verified sources</li>
+                            <li><i class="fas fa-check-circle"></i> Community updates</li>
+                        </ul>
+                        <div class="hub-actions">
+                            <button class="btn-hub-primary"><i class="fas fa-book-open"></i> Read News</button>
+                            <button class="btn-hub-secondary"><i class="fas fa-info"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI World Hub -->
+                <div class="hub-card">
+                    <div class="hub-header">
+                        <h2>AI World Hub</h2>
+                        <p>AI Assistance for AI</p>
+                    </div>
+                    <div class="hub-body">
+                        <div class="hub-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="coin-info">
+                            <i class="fas fa-info-circle"></i> No coin system
+                        </div>
+                        <ul class="hub-features">
+                            <li><i class="fas fa-check-circle"></i> AI tools and resources</li>
+                            <li><i class="fas fa-check-circle"></i> Learning materials</li>
+                            <li><i class="fas fa-check-circle"></i> Development guides</li>
+                        </ul>
+                        <div class="hub-actions">
+                            <button class="btn-hub-primary"><i class="fas fa-cogs"></i> Explore AI</button>
+                            <button class="btn-hub-secondary"><i class="fas fa-info"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                             <!-- Edu Hub -->
+                <div class="hub-card">
+                    <div class="hub-header">
+                       <h2>Edu Hub</h2>
+                        <p>Courses & AI Assistant for Education</p>
+                    </div>
+                    <div class="hub-body">
+                        <div class="hub-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="coin-info">
+                            <i class="fas fa-coins"></i> Earn 1 coin per course purchase
+                        </div>
+                        <ul class="hub-features">
+                            <li><i class="fas fa-check-circle"></i> AI education assistant</li>
+                            <li><i class="fas fa-check-circle"></i> Wide course selection</li>
+                            <li><i class="fas fa-check-circle"></i> Certifications</li>
+                        </ul>
+                        <div class="hub-actions">
+                            <button class="btn-hub-primary"><i class="fas fa-book"></i> Browse Courses</button>
+                            <button class="btn-hub-secondary"><i class="fas fa-info"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Platform -->
+                <div class="hub-card">
+                    <div class="hub-header">
+                        <h2>Social Platform</h2>
+                        <p>Share videos, photos and go live</p>
+                    </div>
+                    <div class="hub-body">
+                        <div class="hub-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="coin-info">
+                            <i class="fas fa-coins"></i> Earn 0.01 coins per post
+                        </div>
+                        <ul class="hub-features">
+                            <li><i class="fas fa-check-circle"></i> Video sharing</li>
+                            <li><i class="fas fa-check-circle"></i> Photo sharing</li>
+                            <li><i class="fas fa-check-circle"></i> Live streaming</li>
+                        </ul>
+                        <div class="hub-actions">
+                            <button class="btn-hub-primary"><i class="fas fa-share"></i> Start Sharing</button>
+                            <button class="btn-hub-secondary"><i class="fas fa-info"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Creator Hub -->
+                <div class="hub-card">
+                    <div class="hub-header">
+                        <h2>Creator Hub</h2>
+                        <p>Social media assistant & website building</p>
+                    </div>
+                    <div class="hub-body">
+                        <div class="hub-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div class="coin-info">
+                            <i class="fas fa-coins"></i> Earn 1 coin per website built
+                        </div>
+                        <ul class="hub-features">
+                            <li><i class="fas fa-check-circle"></i> Social media tools</li>
+                            <li><i class="fas fa-check-circle"></i> Website builder</li>
+                            <li><i class="fas fa-check-circle"></i> Content creation resources</li>
+                        </ul>
+                        <div class="hub-actions">
+                            <button class="btn-hub-primary"><i class="fas fa-plus"></i> Create</button>
+                            <button class="btn-hub-secondary"><i class="fas fa-info"></i> Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subscription Plans -->
+                <div class="plans-section">
+                    <h2 class="section-title">Premium Plans</h2>
+                    <div class="plans-container">
+                        <div class="plan-card">
+                            <h3>Pro Plan</h3>
+                            <div class="plan-price">300 Coins</div>
+                            <ul class="plan-features">
+                                <li><i class="fas fa-check"></i> 5 Website Building</li>
+                                <li><i class="fas fa-check"></i> Game Developer AI - Build 5 Games</li>
+                                <li><i class="fas fa-check"></i> Priority Support</li>
+                                <li><i class="fas fa-check"></i> Advanced AI Tools</li>
+                            </ul>
+                            <button class="btn btn-primary">Activate Now</button>
+                        </div>
+
+                        <div class="plan-card popular">
+                            <div class="popular-badge">Popular</div>
+                            <h3>Unlimited Plan</h3>
+                            <div class="plan-price">500 Coins</div>
+                            <ul class="plan-features">
+                                <li><i class="fas fa-check"></i> 8 Website Building</li>
+                                <li><i class="fas fa-check"></i> Game Developer AI - Build 10 Games</li>
+                                <li><i class="fas fa-check"></i> Priority Support</li>
+                                <li><i class="fas fa-check"></i> All AI Tools Unlimited</li>
+                                <li><i class="fas fa-check"></i> Exclusive Resources</li>
+                            </ul>
+                            <button class="btn btn-primary">Activate Now</button>
+                        </div>
+
+                        <div class="plan-card">
+                            <h3>All Plan</h3>
+                            <div class="plan-price">1000 Coins</div>
+                            <ul class="plan-features">
+                                <li><i class="fas fa-check"></i> 21 Website Building</li>
+                                <li><i class="fas fa-check"></i> Game Developer AI - Build 10 Games</li>
+                                <li><i class="fas fa-check"></i> 24/7 Priority Support</li>
+                                <li><i class="fas fa-check"></i> All Features Unlimited</li>
+                                <li><i class="fas fa-check"></i> Lifetime Access</li>
+                                <li><i class="fas fa-check"></i> Exclusive Content</li>
+                            </ul>
+                            <button class="btn btn-primary">Activate Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-info-circle"></i> Our Story</a></li>
+                        <li><a href="#"><i class="fas fa-values"></i> Our Values</a></li>
+                        <li><a href="#"><i class="fas fa-team"></i> Our Team</a></li>
+                        <li><a href="#"><i class="fas fa-blog"></i> Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-shopping-cart"></i> Shopping Hub</a></li>
+                        <li><a href="#"><i class="fas fa-newspaper"></i> GV News</a></li>
+                        <li><a href="#"><i class="fas fa-book"></i> Digital Library</a></li>
+                        <li><a href="#"><i class="fas fa-business-time"></i> Business Hub</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-question-circle"></i> Help Center</a></li>
+                        <li><a href="#"><i class="fas fa-shipping-fast"></i> Shipping Info</a></li>
+                        <li><a href="#"><i class="fas fa-undo"></i> Returns & Refunds</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                    </ul>
+                </div>
