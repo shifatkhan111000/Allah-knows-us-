@@ -818,3 +818,88 @@
                         <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
                     </ul>
                 </div>
+    </div>
+            <div class="copyright">
+                <p>&copy; 2023 Allah Knows Us - Complete Hub Dashboard. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const hubCards = document.querySelectorAll('.hub-card');
+            let userCoins = 125; // Initial coin balance
+            
+            // Update coin display
+            function updateCoinDisplay() {
+                document.querySelector('.coin-balance span').textContent = userCoins + ' Coins';
+            }
+            
+            hubCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (!e.target.closest('.hub-actions')) {
+                        const hubName = this.querySelector('h2').textContent;
+                        alert(`Opening ${hubName}`);
+                    }
+                });
+            });
+            
+            // Sidebar navigation
+            const sidebarLinks = document.querySelectorAll('.hub-list a');
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    sidebarLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    const hubName = this.textContent;
+                    alert(`Navigating to ${hubName}`);
+                });
+            });
+            
+            // Simulate earning coins
+            const earnButtons = document.querySelectorAll('.btn-hub-primary');
+            earnButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const hubCard = this.closest('.hub-card');
+                    const hubName = hubCard.querySelector('h2').textContent;
+                    
+                    if (hubName === 'Shopping Hub' || hubName === 'Edu Hub' || hubName === 'Creator Hub') {
+                        userCoins += 1;
+                        alert(`You earned 1 coin from ${hubName}!`);
+                    } else if (hubName === 'Social Platform') {
+                        userCoins += 0.01;
+                        alert(`You earned 0.01 coins from ${hubName}!`);
+                    } else if (hubName === 'Digital Library') {
+                        userCoins += 0.03;
+                        alert(`You earned 0.03 coins from ${hubName}!`);
+                    } else if (hubName === 'Islamic Motivation') {
+                        userCoins += 0.02;
+                        alert(`You earned 0.02 coins from ${hubName}!`);
+                    }
+                    
+                    updateCoinDisplay();
+                });
+            });
+            
+            // Plan activation
+            const planButtons = document.querySelectorAll('.plan-card .btn');
+            planButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const plan = this.closest('.plan-card');
+                    const planName = plan.querySelector('h3').textContent;
+                    const planPrice = parseInt(plan.querySelector('.plan-price').textContent);
+                    
+                    if (userCoins >= planPrice) {
+                        userCoins -= planPrice;
+                        alert(`Congratulations! You've activated the ${planName}`);
+                        updateCoinDisplay();
+                    } else {
+                        alert(`You need ${planPrice - userCoins} more coins to activate this plan`);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
