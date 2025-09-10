@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Methods - Allah Knows Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --darker: #0f172a;
+            --islamic-green: #0d9c6f;
+            --islamic-gold: #c19a3f;
+            --radius: 12px;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--darker), var(--primary));
+            color: white;
+            padding: 18px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo i {
+            font-size: 32px;
+            color: var(--accent);
+        }
+
+        .logo h1 {
+            font-family: 'Amiri', serif;
+            font-weight: 700;
+            font-size: 28px;
+            background: linear-gradient(to right, var(--accent), var(--islamic-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: var(--radius);
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .coin-balance {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .coin-balance i {
+            color: var(--accent);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: var(--radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--accent), var(--islamic-green));
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 60px 0;
+            text-align: center;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%232563eb" opacity="0.1"/><path d="M0 0L100 100" stroke="%232563eb" stroke-width="1" opacity="0.2"/></svg>');
+        }
+
+        .hero h2 {
+            font-family: 'Amiri', serif;
+            font-size: 42px;
+            margin-bottom: 20px;
+            color: var(--darker);
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            color: var(--dark);
+        }
+
+        /* Payment Methods Section */
+        .payment-section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-family: 'Amiri', serif;
+            font-size: 32px;
+            color: var(--darker);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .payment-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+        }
+
+        .payment-icon.credit {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+        }
+
+        .payment-icon.paypal {
+            background: rgba(0, 48, 135, 0.1);
+            color: #003087;
+        }
+
+        .payment-icon.bank {
+            background: rgba(13, 156, 111, 0.1);
+            color: var(--islamic-green);
+        }
+
+        .payment-icon.crypto {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--accent);
+        }
+
+        .payment-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--darker);
+        }
+
+        .payment-card p {
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .payment-features {
+            list-style: none;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .payment-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .payment-features li:last-child {
+            border-bottom: none;
+        }
+
+        .payment-features i {
+            color: var(--islamic-green);
+        }
+
+        .payment-fee {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        /* Security Section */
+        .security-section {
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 60px;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .security-item {
+            text-align: center;
+        }
+
+        .security-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+            background: rgba(13, 156, 111, 0.1);
+            color: var(--islamic-green);
+        }
+
+        .security-item h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--darker);
+        }
+
+        .security-item p {
+            color: var(--dark);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-bottom: 60px;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--darker);
+        }
+
+        .faq-answer {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #f1f5f9;
+            color: var(--dark);
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(to right, var(--darker), var(--primary));
+            color: white;
+            border-radius: var(--radius);
+        }
+
+        .cta-section h2 {
+            font-family: 'Amiri', serif;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, var(--darker), var(--primary));
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            font-family: 'Amiri', serif;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: #e0f2fe;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 32px;
+            }
+            
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+            
+            .security-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .user-info {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            nav ul {
+                gap: 10px;
+            }
+            
+            nav a {
+                padding: 6px 10px;
+                font-size: 14px;
+            }
+            
+            .payment-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-star-and-crescent"></i>
+                    <h1>ALLAH KNOWS US</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#"><i class="fas fa-coins"></i> Earn System</a></li>
+                        <li><a href="#"><i class="fas fa-crown"></i> Premium Plans</a></li>
+                        <li><a href="#"><i class="fas fa-credit-card"></i> Payment Methods</a></li>
+                        <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
+                    </ul>
+                </nav>
+                <div class="user-info">
+                    <div class="coin-balance">
+                        <i class="fas fa-coins"></i>
+                        <span>125 Coins</span>
+                    </div>
+                    <button class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Sign In</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Secure Payment Methods</h2>
+            <p>Choose from a variety of secure payment options to purchase coins and access premium features. All transactions are encrypted and secure.</p>
+            <button class="btn btn-primary"><i class="fas fa-coins"></i> Buy Coins Now</button>
+        </div>
+    </section>
+
+    <!-- Payment Methods Section -->
+    <section class="payment-section">
+        <div class="container">
+            <h2 class="section-title">Available Payment Methods</h2>
+            
+            <div class="payment-methods">
+                <div class="payment-card">
+                    <div class="payment-icon credit">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3>Credit/Debit Cards</h3>
+                    <p>Secure payment with Visa, Mastercard, and other major cards</p>
+                    
+                    <ul class="payment-features">
+                        <li><i class="fas fa-check-circle"></i> Instant processing</li>
+                        <li><i class="fas fa-check-circle"></i> SSL encryption</li>
+                        <li><i class="fas fa-check-circle"></i> Worldwide acceptance</li>
+                    </ul>
+                    
+                    <div class="payment-fee">Fee: 2.9% + $0.30</div>
+                    <button class="btn btn-primary">Pay with Card</button>
+                </div>
+                
+                <div class="payment-card">
+                    <div class="payment-icon paypal">
+                        <i class="fab fa-paypal"></i>
+                    </div>
+                    <h3>PayPal</h3>
+                    <p>Fast and secure payments with your PayPal account</p>
+                    
+                    <ul class="payment-features">
+                        <li><i class="fas fa-check-circle"></i> Buyer protection</li>
+                        <li><i class="fas fa-check-circle"></i> Instant transfer</li>
+                        <li><i class="fas fa-check-circle"></i> No card details needed</li>
+                    </ul>
+                    
+                    <div class="payment-fee">Fee: 3.4% + $0.30</div>
+                    <button class="btn btn-primary">Pay with PayPal</button>
+                </div>
+                
+                <div class="payment-card">
+                    <div class="payment-icon bank">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>Bank Transfer</h3>
+                    <p>Direct bank transfer for larger transactions</p>
+                    
+                    <ul class="payment-features">
+                        <li><i class="fas fa-check-circle"></i> Lower fees</li>
+                        <li><i class="fas fa-check-circle"></i> Higher limits</li>
+                        <li><i class="fas fa-check-circle"></i> Secure processing</li>
+                    </ul>
+                    
+                    <div class="payment-fee">Fee: 1.5% (min $5)</div>
+                    <button class="btn btn-primary">Pay with Bank Transfer</button>
+                </div>
+                
+                <div class="payment-card">
+                    <div class="payment-icon crypto">
+                        <i class="fab fa-bitcoin"></i>
+                    </div>
+                    <h3>Cryptocurrency</h3>
+                    <p>Pay with Bitcoin, Ethereum, and other cryptocurrencies</p>
+                    
+                    <ul class="payment-features">
+                        <li><i class="fas fa-check-circle"></i> Lowest fees</li>
+                        <li><i class="fas fa-check-circle"></i> Anonymous payments</li>
+                        <li><i class="fas fa-check-circle"></i> Global access</li>
+                    </ul>
+                    
+                    <div class="payment-fee">Fee: 0.8%</div>
+                    <button class="btn btn-primary">Pay with Crypto</button>
+                </div>
+            </div>
+            
+            <!-- Security Section -->
+            <div class="security-section">
+                <h2 class="section-title">Your Security is Our Priority</h2>
+                
+                <div class="security-grid">
+                    <div class="security-item">
+                        <div class="security-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h3>SSL Encryption</h3>
+                        <p>All transactions are encrypted with 256-bit SSL security</p>
+                    </div>
+                    
+                    <div class="security-item">
+                        <div class="security-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Fraud Protection</h3>
+                        <p>Advanced fraud detection systems monitor all transactions</p>
+                    </div>
+                    
+                    <div class="security-item">
+                        <div class="security-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <h3>Privacy Guaranteed</h3>
+                        <p>Your financial information is never stored on our servers</p>
+                    </div>
+                    
+                    <div class="security-item">
+                        <div class="security-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <h3>Money-Back Guarantee</h3>
+                        <p>30-day money-back guarantee on all purchases</p>
+</div>
+                </div>
+            </div>
+            
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How long does it take to receive my coins?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Coins are typically credited to your account instantly after successful payment. In some cases, it may take up to 5-10 minutes for bank transfers.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Are there any transaction limits?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, for security reasons, there are daily and monthly transaction limits. These vary by payment method and can be increased after account verification.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What currencies do you accept?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We accept USD, EUR, GBP, and several other major currencies. Cryptocurrency payments are converted to USD at the current exchange rate.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I get a refund?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, we offer a 30-day money-back guarantee on all coin purchases. Refunds are processed to the original payment method.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Get Started?</h2>
+            <p>Choose your preferred payment method and start enjoying all the benefits of our platform today.</p>
+            <button class="btn btn-outline"><i class="fas fa-coins"></i> Purchase Coins Now</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-info-circle"></i> Our Story</a></li>
+                        <li><a href="#"><i class="fas fa-values"></i> Our Values</a></li>
+                        <li><a href="#"><i class="fas fa-team"></i> Our Team</a></li>
+                        <li><a href="#"><i class="fas fa-blog"></i> Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-shopping-cart"></i> Shopping Hub</a></li>
+                        <li><a href="#"><i class="fas fa-newspaper"></i> GV News</a></li>
+                        <li><a href="#"><i class="fas fa-book"></i> Digital Library</a></li>
+                        <li><a href="#"><i class="fas fa-business-time"></i> Business Hub</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-question-circle"></i> Help Center</a></li>
+                        <li><a href="#"><i class="fas fa-credit-card"></i> Payment Help</a></li>
+                        <li><a href="#"><i class="fas fa-undo"></i> Refunds</a></li>
+                        <li><a href="#"><i class="fas fa-phone"></i> Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Allah Knows Us - Complete Hub Dashboard. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for FAQ functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+            });
+            
+            // Payment method buttons
+            const paymentButtons = document.querySelectorAll('.payment-card .btn');
+            
+            paymentButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const paymentMethod = this.closest('.payment-card').querySelector('h3').textContent;
+                    alert(`You selected ${paymentMethod}. This would open the payment processing page.`);
+                });
+            });
+            
+            // CTA button
+            const ctaButton = document.querySelector('.cta-section .btn');
+            
+            ctaButton.addEventListener('click', function() {
+                alert('Redirecting to coin purchase page...');
+            });
+        });
+    </script>
+</body>
+</html>
